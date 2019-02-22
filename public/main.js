@@ -46,7 +46,7 @@ const getRandomCount = () => {
   return Math.round(Math.random() * RANDOM_MAX);
 };
 
-const createFilterInput = ({id, condition = false}) => {
+const createFilterInput = ({id, condition = false}, countTasks, onClickFilter) => {
   const input = document.createElement(`input`);
   input.type = `radio`;
   input.id = id;
@@ -55,6 +55,9 @@ const createFilterInput = ({id, condition = false}) => {
   if (condition) {
     input.setAttribute(condition, condition);
   }
+  input.addEventListener(`click`, () => {
+    onClickFilter(countTasks);
+  });
   return input;
 };
 
@@ -74,6 +77,10 @@ const pushFilteredCards = (tasksCount) => {
   TASKS_BOARD.appendChild(fragmentCards);
 };
 
+const clearTasksBoard = () => {
+  TASKS_BOARD.innerHTML = ``;
+};
+
 const taskCard = () => {
   const templateCard = document.querySelector(`.tmpl__taskcard`);
   return templateCard.content.cloneNode(true);
@@ -82,11 +89,17 @@ const taskCard = () => {
 const fragment = document.createDocumentFragment();
 
 const fragmentFilters = FILTERS.reduce((result, current) => {
+  const onClickFilter = (countTasks) => {
+    clearTasksBoard();
+    pushFilteredCards(countTasks);
+  };
+
   const countTasks = getRandomCount();
-  fragment.appendChild(createFilterInput(current));
+  fragment.appendChild(createFilterInput(current, countTasks, onClickFilter));
   fragment.appendChild(createFilterLabel(current, countTasks));
   return fragment;
 }, 0);
 
 FILTERS_PATH.appendChild(fragmentFilters);
+
 pushFilteredCards(TASK_2_CARD_COUNT);
