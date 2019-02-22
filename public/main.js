@@ -38,6 +38,10 @@ const FILTERS = [
 
 const FILTERS_PATH = document.querySelector(`.main__filter`);
 
+const TASK_2_CARD_COUNT = 7;
+
+const TASKS_BOARD = document.querySelector(`.board__tasks`);
+
 const getRandomCount = () => {
   return Math.round(Math.random() * RANDOM_MAX);
 };
@@ -62,6 +66,19 @@ const createFilterLabel = ({id, text}, countTasks) => {
   return label;
 };
 
+const pushFilteredCards = (tasksCount) => {
+  const fragmentCards = document.createDocumentFragment();
+  for (let i = 0; i < tasksCount; i++) {
+    fragmentCards.appendChild(taskCard());
+  }
+  TASKS_BOARD.appendChild(fragmentCards);
+};
+
+const taskCard = () => {
+  const templateCard = document.querySelector(`.tmpl__taskcard`);
+  return templateCard.content.cloneNode(true);
+};
+
 const fragment = document.createDocumentFragment();
 
 const fragmentFilters = FILTERS.reduce((result, current) => {
@@ -72,3 +89,4 @@ const fragmentFilters = FILTERS.reduce((result, current) => {
 }, 0);
 
 FILTERS_PATH.appendChild(fragmentFilters);
+pushFilteredCards(TASK_2_CARD_COUNT);
