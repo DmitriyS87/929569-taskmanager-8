@@ -59,11 +59,6 @@ const clearTasksBoard = () => {
   TASKS_BOARD.innerHTML = ``;
 };
 
-const taskCard = () => {
-  const templateCard = document.querySelector(`.tmpl__taskcard`);
-  return templateCard.content.cloneNode(true);
-};
-
 FILTERS.forEach((renderData) => {
   const onClickFilter = (countTasks) => {
     clearTasksBoard();
