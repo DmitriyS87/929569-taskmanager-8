@@ -1,3 +1,5 @@
+import filter from './filter';
+
 const RANDOM_MAX = 50;
 
 const FILTERS = [
@@ -44,29 +46,6 @@ const getRandomCount = () => {
   return Math.round(Math.random() * RANDOM_MAX);
 };
 
-const createFilterInput = ({id, condition = false}, countTasks, onClickFilter) => {
-  const input = document.createElement(`input`);
-  input.type = `radio`;
-  input.id = id;
-  input.classList.add(`filter__input`, `visually-hidden`);
-  input.name = `filter`;
-  if (condition) {
-    input.setAttribute(condition, condition);
-  }
-  input.addEventListener(`click`, () => {
-    onClickFilter(countTasks);
-  });
-  return input;
-};
-
-const createFilterLabel = ({id, text}, countTasks) => {
-  const label = document.createElement(`label`);
-  label.htmlFor = id;
-  label.classList.add(`filter__label`);
-  label.innerHTML = `${text} <span class="filter__all-count">${countTasks}</span>`;
-  return label;
-};
-
 const pushFilteredCards = (tasksCount) => {
   const fragmentCards = document.createDocumentFragment();
   for (let i = 0; i < tasksCount; i++) {
@@ -86,18 +65,16 @@ const taskCard = () => {
 
 const fragment = document.createDocumentFragment();
 
-const fragmentFilters = FILTERS.reduce((result, current) => {
+FILTERS.forEach((renderData) => {
   const onClickFilter = (countTasks) => {
     clearTasksBoard();
     pushFilteredCards(countTasks);
   };
 
   const countTasks = getRandomCount();
-  fragment.appendChild(createFilterInput(current, countTasks, onClickFilter));
-  fragment.appendChild(createFilterLabel(current, countTasks));
-  return fragment;
-}, 0);
+  fragment.appendChild(filter(renderData, countTasks, onClickFilter));
+});
 
-FILTERS_PATH.appendChild(fragmentFilters);
+FILTERS_PATH.appendChild(fragment);
 
 pushFilteredCards(TASK_2_CARD_COUNT);
