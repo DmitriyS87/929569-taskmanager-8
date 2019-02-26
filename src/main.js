@@ -63,8 +63,6 @@ const taskCard = () => {
   return templateCard.content.cloneNode(true);
 };
 
-const fragment = document.createDocumentFragment();
-
 FILTERS.forEach((renderData) => {
   const onClickFilter = (countTasks) => {
     clearTasksBoard();
@@ -72,9 +70,7 @@ FILTERS.forEach((renderData) => {
   };
 
   const countTasks = getRandomCount();
-  fragment.appendChild(filter(renderData, countTasks, onClickFilter));
+  FILTERS_PATH.appendChild(filter(renderData, countTasks, onClickFilter));
 });
-
-FILTERS_PATH.appendChild(fragment);
 
 pushFilteredCards(TASK_2_CARD_COUNT);
