@@ -294,7 +294,7 @@ It is example of repeating task. It marks by wave.</textarea
   const cardTemplate = document.createElement(`template`);
   cardTemplate.innerHTML = card;
 
-  return cardTemplate;
+  return cardTemplate.content;
 };
 
 
