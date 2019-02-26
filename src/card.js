@@ -1,6 +1,5 @@
-const cardTemplate = document.createElement(`template`);
-cardTemplate.innerHTML = () => {
-  return `<article class="card card--pink card--repeat">
+export const createCard = () => {
+  const card = `<article class="card card--pink card--repeat">
         <form class="card__form" method="get">
           <div class="card__inner">
             <div class="card__control">
@@ -291,6 +290,11 @@ It is example of repeating task. It marks by wave.</textarea
             </div>
           </div>
         </form>
-      </article>`
-  ; 
+      </article>`;
+  const cardTemplate = document.createElement(`template`);
+  cardTemplate.innerHTML = card;
+
+  return cardTemplate;
 };
+
+
