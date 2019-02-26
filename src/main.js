@@ -1,4 +1,5 @@
 import filter from './filter';
+import {createCard as Card} from './card';
 
 const RANDOM_MAX = 50;
 
