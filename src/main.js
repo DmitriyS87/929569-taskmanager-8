@@ -1,5 +1,5 @@
 import filter from './filter';
-import {createCard as Card} from './card';
+import {createCard as card} from './card';
 
 const RANDOM_MAX = 50;
 
@@ -50,7 +50,7 @@ const getRandomCount = () => {
 const pushFilteredCards = (tasksCount) => {
   const fragmentCards = document.createDocumentFragment();
   for (let i = 0; i < tasksCount; i++) {
-    fragmentCards.appendChild(taskCard());
+    fragmentCards.appendChild(card());
   }
   TASKS_BOARD.appendChild(fragmentCards);
 };
