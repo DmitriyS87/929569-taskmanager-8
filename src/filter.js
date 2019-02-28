@@ -21,7 +21,7 @@ const createFilterLabel = ({id, text}, countTasks) => {
   return label;
 };
 
-export default (renderData, countTasks, onClickFilter) => {
+export const createFilter = (renderData, countTasks, onClickFilter) => {
   const template = document.createDocumentFragment();
   template.appendChild(createFilterInput(renderData, countTasks, onClickFilter));
   template.appendChild(createFilterLabel(renderData, countTasks));

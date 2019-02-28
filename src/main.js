@@ -1,4 +1,4 @@
-import filter from './filter';
+import {createFilter} from './filter';
 import {createCard} from './card';
 
 const RANDOM_MAX = 50;
@@ -66,7 +66,7 @@ FILTERS.forEach((renderData) => {
   };
 
   const countTasks = getRandomCount();
-  FILTERS_PATH.appendChild(filter(renderData, countTasks, onClickFilter));
+  FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 
 pushFilteredCards(TASK_2_CARD_COUNT);
