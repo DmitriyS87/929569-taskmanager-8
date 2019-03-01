@@ -1,29 +1,29 @@
-const createFilterInput = ({id, condition = false}, countTasks, onClickFilter) => {
+const createFilterInput = (data, taskCount, onFilterClick) => {
   const input = document.createElement(`input`);
   input.type = `radio`;
-  input.id = id;
+  input.id = data.id;
   input.classList.add(`filter__input`, `visually-hidden`);
   input.name = `filter`;
-  if (condition) {
-    input.setAttribute(condition, condition);
+  if (data.condition) {
+    input.setAttribute(data.condition, data.condition);
   }
   input.addEventListener(`click`, () => {
-    onClickFilter(countTasks);
+    onFilterClick(taskCount);
   });
   return input;
 };
 
-const createFilterLabel = ({id, text}, countTasks) => {
+const createFilterLabel = (data, taskCount) => {
   const label = document.createElement(`label`);
-  label.htmlFor = id;
+  label.htmlFor = data.id;
   label.classList.add(`filter__label`);
-  label.innerHTML = `${text} <span class="filter__all-count">${countTasks}</span>`;
+  label.innerHTML = `${data.text} <span class="filter__all-count">${taskCount}</span>`;
   return label;
 };
 
-export const createFilter = (renderData, countTasks, onClickFilter) => {
+export const createFilter = (data, taskCount, onFilterClick) => {
   const template = document.createDocumentFragment();
-  template.appendChild(createFilterInput(renderData, countTasks, onClickFilter));
-  template.appendChild(createFilterLabel(renderData, countTasks));
+  template.appendChild(createFilterInput(data, taskCount, onFilterClick));
+  template.appendChild(createFilterLabel(data, taskCount));
   return template;
 };
