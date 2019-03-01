@@ -48,11 +48,11 @@ const getRandomCount = () => {
 };
 
 const pushFilteredCards = (tasksCount) => {
-  const fragmentCards = document.createDocumentFragment();
+  const cardsFragment = document.createDocumentFragment();
   for (let i = 0; i < tasksCount; i++) {
-    fragmentCards.appendChild(createCard());
+    cardsFragment.appendChild(createCard());
   }
-  TASKS_BOARD.appendChild(fragmentCards);
+  TASKS_BOARD.appendChild(cardsFragment);
 };
 
 const clearTasksBoard = () => {
