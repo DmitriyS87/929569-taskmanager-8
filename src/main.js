@@ -82,12 +82,22 @@ const getRandomCount = (max) => {
   return Math.round(Math.random() * max);
 };
 
-const TASK_DATA = {
-  title: TASKS_TITLES[Math.floor(Math.random() * 3)],
-  dueDate: makeTaskDate(),
-  tags: new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT)),
-  picture: `http://picsum.photos/100/100?r=${Math.random()}`,
-  color: ARRAY_COLORS[[Math.round(Math.random() * ARRAY_COLORS.length)]],
+let TASK_DATA = {
+  get title() {
+    return TASKS_TITLES[Math.floor(Math.random() * 3)];
+  },
+  get dueDate() {
+    return makeTaskDate();
+  },
+  get tags() {
+    return new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT));
+  },
+  get picture() {
+    return `http://picsum.photos/100/100?r=${Math.random()}`;
+  },
+  get color() {
+    return ARRAY_COLORS[[Math.round(Math.random() * ARRAY_COLORS.length)]];
+  },
   repeatingDays: {
     get Mo() {
       return Math.random() > 0.5 ? true : false;
@@ -122,7 +132,7 @@ const TASK_DATA = {
 const pushFilteredCards = (tasksCount) => {
   const cardsFragment = document.createDocumentFragment();
   for (let i = 0; i < tasksCount; i++) {
-    cardsFragment.appendChild(createCard());
+    cardsFragment.appendChild(createCard(TASK_DATA));
   }
   TASKS_BOARD.appendChild(cardsFragment);
 };
