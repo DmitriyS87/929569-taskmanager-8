@@ -2,6 +2,43 @@ import {createFilter} from './filter';
 import {createCard} from './card';
 
 const RANDOM_MAX = 50;
+const ARRAY_TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`, `mentor`, `important`];
+const MAX_TAGS_COUNT = 3;
+
+const getRandomSubArray = function (array, count) {
+  const subArray = [];
+  const indexSequence = getIndexSequence(array.length);
+  const length = getRandomCount(count);
+  for (let j = 0; j < length; j++) {
+    let randomIndex = getRandomCount(indexSequence.length - 1);
+    subArray.push(array[indexSequence[randomIndex]]);
+    indexSequence.splice(randomIndex, 1);
+  }
+  return subArray;
+
+};
+
+const getIndexSequence = function (max) {
+  const sequence = [];
+  for (let index = 0; index < max; index++) {
+    sequence.push(index);
+  }
+  return sequence;
+};
+
+const makeTaskDate = () => {
+  const date = new Date();
+  date.setDate(Math.floor(Math.random() * 7 - Math.random() * 7));
+
+  const options = {
+    day: `numeric`,
+    month: `long`,
+    hour: `numeric`,
+    minute: `numeric`
+  };
+
+  return date.toLocaleString(`en-US`, options);
+};
 
 const FILTERS = [
   {
@@ -37,14 +74,55 @@ const FILTERS = [
   }
 ];
 
+const ARRAY_COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
+
 const FILTERS_PATH = document.querySelector(`.main__filter`);
 
 const TASK_2_CARD_COUNT = 7;
 
 const TASKS_BOARD = document.querySelector(`.board__tasks`);
 
-const getRandomCount = () => {
-  return Math.round(Math.random() * RANDOM_MAX);
+const getRandomCount = (max) => {
+  return Math.round(Math.random() * max);
+};
+
+const TASK_DATA = {
+  title: [`Изучить теорию`,
+    `Сделать домашку`,
+    `Пройти интенсив на соточку`][Math.floor(Math.random() * 3)],
+  dueDate: makeTaskDate(),
+  tags: new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT)),
+  picture: `http://picsum.photos/100/100?r=${Math.random()}`,
+  color: ARRAY_COLORS[[Math.round(Math.random() * ARRAY_COLORS.length)]],
+  repeatingDays: {
+    get Mo() {
+      return Math.random() > 0.5 ? true : false;
+    },
+    get Tu() {
+      return Math.random() > 0.5 ? true : false;
+    },
+    get We() {
+      return Math.random() > 0.5 ? true : false;
+    },
+    get Th() {
+      return Math.random() > 0.5 ? true : false;
+    },
+    get Fr() {
+      return Math.random() > 0.5 ? true : false;
+    },
+    get Sa() {
+      return Math.random() > 0.5 ? true : false;
+    },
+    get Su() {
+      return Math.random() > 0.5 ? true : false;
+    }
+  },
+  get isFavorite() {
+    return Math.random() > 0.5 ? true : false;
+  },
+  get isDone() {
+    return Math.random() > 0.5 ? true : false;
+  }
 };
 
 const pushFilteredCards = (tasksCount) => {
@@ -65,7 +143,7 @@ FILTERS.forEach((renderData) => {
     pushFilteredCards(countTasks);
   };
 
-  const countTasks = getRandomCount();
+  const countTasks = getRandomCount(RANDOM_MAX);
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 
