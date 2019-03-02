@@ -4,6 +4,44 @@ import {createCard} from './card';
 const RANDOM_MAX = 50;
 const ARRAY_TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`, `mentor`, `important`];
 const MAX_TAGS_COUNT = 3;
+const ARRAY_COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
+const FILTERS_PATH = document.querySelector(`.main__filter`);
+const TASK_2_CARD_COUNT = 7;
+const TASKS_BOARD = document.querySelector(`.board__tasks`);
+const TASKS_TITLES = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
+const FILTERS = [
+  {
+    id: `filter__all`,
+    text: `ALL`,
+    condition: `checked`
+  },
+  {
+    id: `filter__overdue`,
+    text: `OVERDUE`,
+    condition: `disabled`
+  },
+  {
+    id: `filter__today`,
+    text: `TODAY`,
+    condition: `disabled`
+  },
+  {
+    id: `filter__favorites`,
+    text: `FAVORITES`
+  },
+  {
+    id: `filter__repeating`,
+    text: `Repeating`
+  },
+  {
+    id: `filter__tags`,
+    text: `Tags`
+  },
+  {
+    id: `filter__archive`,
+    text: `ARCHIVE`
+  }
+];
 
 const getRandomSubArray = function (array, count) {
   const subArray = [];
@@ -40,56 +78,12 @@ const makeTaskDate = () => {
   return date.toLocaleString(`en-US`, options);
 };
 
-const FILTERS = [
-  {
-    id: `filter__all`,
-    text: `ALL`,
-    condition: `checked`
-  },
-  {
-    id: `filter__overdue`,
-    text: `OVERDUE`,
-    condition: `disabled`
-  },
-  {
-    id: `filter__today`,
-    text: `TODAY`,
-    condition: `disabled`
-  },
-  {
-    id: `filter__favorites`,
-    text: `FAVORITES`
-  },
-  {
-    id: `filter__repeating`,
-    text: `Repeating`
-  },
-  {
-    id: `filter__tags`,
-    text: `Tags`
-  },
-  {
-    id: `filter__archive`,
-    text: `ARCHIVE`
-  }
-];
-
-const ARRAY_COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
-
-const FILTERS_PATH = document.querySelector(`.main__filter`);
-
-const TASK_2_CARD_COUNT = 7;
-
-const TASKS_BOARD = document.querySelector(`.board__tasks`);
-
 const getRandomCount = (max) => {
   return Math.round(Math.random() * max);
 };
 
 const TASK_DATA = {
-  title: [`Изучить теорию`,
-    `Сделать домашку`,
-    `Пройти интенсив на соточку`][Math.floor(Math.random() * 3)],
+  title: TASKS_TITLES[Math.floor(Math.random() * 3)],
   dueDate: makeTaskDate(),
   tags: new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT)),
   picture: `http://picsum.photos/100/100?r=${Math.random()}`,
