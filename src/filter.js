@@ -1,4 +1,4 @@
-const createFilterInput = (data, taskCount, onFilterClick) => {
+const createFilterInput = (data, taskCount, onClickFilter) => {
   const input = document.createElement(`input`);
   input.type = `radio`;
   input.id = data.id;
@@ -7,8 +7,8 @@ const createFilterInput = (data, taskCount, onFilterClick) => {
   if (data.condition) {
     input.setAttribute(data.condition, data.condition);
   }
-  input.addEventListener(`click`, () => {
-    onFilterClick(taskCount);
+  input.addEventListener(`click`, (evt) => {
+    onClickFilter(taskCount, evt);
   });
   return input;
 };
@@ -21,9 +21,9 @@ const createFilterLabel = (data, taskCount) => {
   return label;
 };
 
-export const createFilter = (data, taskCount, onFilterClick) => {
+export const createFilter = (data, taskCount, onClickFilter) => {
   const template = document.createDocumentFragment();
-  template.appendChild(createFilterInput(data, taskCount, onFilterClick));
+  template.appendChild(createFilterInput(data, taskCount, onClickFilter));
   template.appendChild(createFilterLabel(data, taskCount));
   return template;
 };
