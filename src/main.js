@@ -129,6 +129,14 @@ let TASK_DATA = {
   }
 };
 
+const generateArrayTasks = (number) => {
+  const arrayTasks = [];
+  for (const i = 0; i < number; i++) {
+    arrayTasks.push(TASK_DATA);
+  }
+  return arrayTasks;
+};
+
 const pushFilteredCards = (tasksCount) => {
   const cardsFragment = document.createDocumentFragment();
   for (let i = 0; i < tasksCount; i++) {
