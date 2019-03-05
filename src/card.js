@@ -6,15 +6,35 @@ const mapColors = new Map([[`black`, `card--black`],
   [`green`, `card--green`],
   [`pink`, `card--pink`]]);
 
+const hashtagTemplate = document.createElement(`template`);
+hashtagTemplate.innerHTML = `<span class="card__hashtag-inner">
+<input
+  type="hidden"
+  name="hashtag"
+  value="repeat"
+  class="card__hashtag-hidden-input"
+/>
+<button type="button" class="card__hashtag-name">
+  #repeat
+</button>
+<button type="button" class="card__hashtag-delete">
+  delete
+</button>
+</span>`;
+
 
 const getColorStyle = (color) => {
-  console.log(color);
-  console.log(mapColors.get(color));
   return mapColors.get(color);
 };
 
+const addHashtag = (name) => {
+  const template = hashtagTemplate.content.cloneNode(true);
+  template.querySelector(`.card__hashtag-inner input`).value = name;
+  template.querySelector(`.card__hashtag-name`).textContent = `#` + name;
+  return template;
+};
+
 export const createCard = (data) => {
-  console.log(data);
   const template = document.createElement(`template`);
   template.innerHTML = `<article class="card">
   <form class="card__form" method="get">
@@ -161,50 +181,7 @@ export const createCard = (data) => {
 
           <div class="card__hashtag">
             <div class="card__hashtag-list">
-              <span class="card__hashtag-inner">
-                <input
-                  type="hidden"
-                  name="hashtag"
-                  value="repeat"
-                  class="card__hashtag-hidden-input"
-                />
-                <button type="button" class="card__hashtag-name">
-                  #repeat
-                </button>
-                <button type="button" class="card__hashtag-delete">
-                  delete
-                </button>
-              </span>
 
-              <span class="card__hashtag-inner">
-                <input
-                  type="hidden"
-                  name="hashtag"
-                  value="repeat"
-                  class="card__hashtag-hidden-input"
-                />
-                <button type="button" class="card__hashtag-name">
-                  #cinema
-                </button>
-                <button type="button" class="card__hashtag-delete">
-                  delete
-                </button>
-              </span>
-
-              <span class="card__hashtag-inner">
-                <input
-                  type="hidden"
-                  name="hashtag"
-                  value="repeat"
-                  class="card__hashtag-hidden-input"
-                />
-                <button type="button" class="card__hashtag-name">
-                  #entertaiment
-                </button>
-                <button type="button" class="card__hashtag-delete">
-                  delete
-                </button>
-              </span>
             </div>
 
             <label>
@@ -306,9 +283,24 @@ export const createCard = (data) => {
     </div>
   </form>
 </article>`;
-  // console.log(template.content.querySelector(`.card__btn`));
+
   template.content.querySelector(`.card__text`).textContent = data.title;
-  template.content.querySelector(`.card__date`).value = data.dueDate;
+  template.content.querySelector(`.card__date-deadline`).removeAttribute(`disabled`);
+
+  const getLocaledDate = (date, locale, options) => {
+    return new Intl.DateTimeFormat(locale, options).format(date);
+  };
+  const dayOptions = {
+    day: `numeric`,
+    month: `long`
+  };
+  const timeOptions = {
+    hour: `numeric`,
+    minute: `numeric`
+  };
+
+  template.content.querySelector(`.card__date`).value = getLocaledDate(data.dueDate, `en-GB`, dayOptions);
+  template.content.querySelector(`.card__time`).value = getLocaledDate(data.dueDate, `en-US`, timeOptions);
   template.content.querySelector(`.card`).classList.add(getColorStyle(data.color));
   template.content.querySelector(`.card__img-wrap`).classList.remove(`card__img-wrap--empty`);
   template.content.querySelector(`.card__img`).src = data.picture;
@@ -320,6 +312,12 @@ export const createCard = (data) => {
       makeRepeatingCard();
     }
   }
+  if (data.isFavorite) {
+    template.content.querySelector(`.card`).classList.add(`card--deadline`);
+  }
+  data.tags.forEach((tag) => {
+    template.content.querySelector(`.card__hashtag-list`).appendChild(addHashtag(tag));
+  });
 
   return template.content;
 };
