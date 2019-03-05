@@ -136,7 +136,7 @@ const renderTasks = (tasks) => {
   TASKS_BOARD.appendChild(cardsFragment);
 };
 
-const pushFilteredCards = (tasksCount, id) => {
+const pushFilteredCards = (tasksCount) => {
   const cardsFragment = document.createDocumentFragment();
   for (let i = 0; i < tasksCount; i++) {
     cardsFragment.appendChild(createCard(tasks[i]));
@@ -149,9 +149,9 @@ const clearTasksBoard = () => {
 };
 
 FILTERS.forEach((renderData) => {
-  const onClickFilter = (countTasks, evt) => {
+  const onClickFilter = (countTasks) => {
     clearTasksBoard();
-    pushFilteredCards(countTasks, evt.target.id);
+    pushFilteredCards(countTasks);
   };
 
   const countTasks = getRandomCount(RANDOM_MAX);

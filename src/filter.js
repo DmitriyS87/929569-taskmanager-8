@@ -7,8 +7,8 @@ const createFilterInput = (data, taskCount, onClickFilter) => {
   if (data.condition) {
     input.setAttribute(data.condition, data.condition);
   }
-  input.addEventListener(`click`, (evt) => {
-    onClickFilter(taskCount, evt);
+  input.addEventListener(`click`, () => {
+    onClickFilter(taskCount);
   });
   return input;
 };
