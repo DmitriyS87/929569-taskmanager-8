@@ -67,15 +67,7 @@ const getIndexSequence = function (max) {
 const makeTaskDate = () => {
   const date = new Date();
   date.setDate(Math.floor(Math.random() * 7 - Math.random() * 7));
-
-  const options = {
-    day: `numeric`,
-    month: `long`,
-    hour: `numeric`,
-    minute: `numeric`
-  };
-
-  return date.toLocaleString(`en-US`, options);
+  return date;
 };
 
 const getRandomCount = (max) => {
@@ -149,7 +141,7 @@ const pushFilteredCards = (tasksCount, id) => {
   const cardsFragment = document.createDocumentFragment();
   console.log(id);
   for (let i = 0; i < tasksCount; i++) {
-    cardsFragment.appendChild(createCard(TASK_DATA));
+    cardsFragment.appendChild(createCard(tasks[i]));
   }
   TASKS_BOARD.appendChild(cardsFragment);
 };
@@ -168,5 +160,5 @@ FILTERS.forEach((renderData) => {
   const countTasks = getRandomCount(RANDOM_MAX);
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
-
-renderTasks(generateArrayTasks());
+const tasks = generateArrayTasks();
+renderTasks(tasks);
