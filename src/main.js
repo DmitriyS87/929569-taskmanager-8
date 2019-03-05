@@ -129,9 +129,9 @@ let TASK_DATA = {
   }
 };
 
-const generateArrayTasks = (number) => {
+const generateArrayTasks = (number = 100) => {
   const arrayTasks = [];
-  for (const i = 0; i < number; i++) {
+  for (let i = 0; i < number; i++) {
     arrayTasks.push(TASK_DATA);
   }
   return arrayTasks;
@@ -169,4 +169,4 @@ FILTERS.forEach((renderData) => {
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 
-pushFilteredCards(TASK_2_CARD_COUNT);
+renderTasks(generateArrayTasks());
