@@ -139,7 +139,6 @@ const renderTasks = (tasks) => {
 
 const pushFilteredCards = (tasksCount, id) => {
   const cardsFragment = document.createDocumentFragment();
-  console.log(id);
   for (let i = 0; i < tasksCount; i++) {
     cardsFragment.appendChild(createCard(tasks[i]));
   }
@@ -153,7 +152,6 @@ const clearTasksBoard = () => {
 FILTERS.forEach((renderData) => {
   const onClickFilter = (countTasks, evt) => {
     clearTasksBoard();
-    // console.log(evt.target.id);
     pushFilteredCards(countTasks, evt.target.id);
   };
 
