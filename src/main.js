@@ -137,8 +137,17 @@ const generateArrayTasks = (number) => {
   return arrayTasks;
 };
 
-const pushFilteredCards = (tasksCount) => {
+const renderTasks = (tasks) => {
   const cardsFragment = document.createDocumentFragment();
+  for (let i = 0; i < tasks.length; i++) {
+    cardsFragment.appendChild(createCard(tasks[i]));
+  }
+  TASKS_BOARD.appendChild(cardsFragment);
+};
+
+const pushFilteredCards = (tasksCount, id) => {
+  const cardsFragment = document.createDocumentFragment();
+  console.log(id);
   for (let i = 0; i < tasksCount; i++) {
     cardsFragment.appendChild(createCard(TASK_DATA));
   }
@@ -150,9 +159,10 @@ const clearTasksBoard = () => {
 };
 
 FILTERS.forEach((renderData) => {
-  const onClickFilter = (countTasks) => {
+  const onClickFilter = (countTasks, evt) => {
     clearTasksBoard();
-    pushFilteredCards(countTasks);
+    // console.log(evt.target.id);
+    pushFilteredCards(countTasks, evt.target.id);
   };
 
   const countTasks = getRandomCount(RANDOM_MAX);
