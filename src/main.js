@@ -6,7 +6,6 @@ const ARRAY_TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`, `ment
 const MAX_TAGS_COUNT = 3;
 const ARRAY_COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
 const FILTERS_PATH = document.querySelector(`.main__filter`);
-const TASK_2_CARD_COUNT = 7;
 const TASKS_BOARD = document.querySelector(`.board__tasks`);
 const TASKS_TITLES = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
 const FILTERS = [
