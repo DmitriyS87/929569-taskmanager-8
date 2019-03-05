@@ -96,7 +96,7 @@ let TASK_DATA = {
     return `http://picsum.photos/100/100?r=${Math.random()}`;
   },
   get color() {
-    return ARRAY_COLORS[[Math.round(Math.random() * ARRAY_COLORS.length)]];
+    return ARRAY_COLORS[[Math.round(Math.random() * (ARRAY_COLORS.length - 1))]];
   },
   repeatingDays: {
     get Mo() {
