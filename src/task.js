@@ -4,6 +4,12 @@ const mapColors = new Map([[`black`, `card--black`],
   [`green`, `card--green`],
   [`pink`, `card--pink`]]);
 
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement;
+};
+
 class Task {
   constructor(data) {
     this._title = data.title,
@@ -317,8 +323,12 @@ class Task {
   </article>`;
     return template.content;
   }
+
+  render() {
+    this._element = createElement(this.template);
+    return this._element;
+  }
 }
 
-export const task = () => {
-  return Task;
-};
+export default Task;
+
