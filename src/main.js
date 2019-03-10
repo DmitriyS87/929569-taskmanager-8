@@ -1,5 +1,6 @@
 import {createFilter} from './filter';
 import {createCard} from './card';
+import {makeTaskData} from './data';
 
 const RANDOM_MAX = 50;
 const ARRAY_TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`, `mentor`, `important`];
@@ -123,7 +124,7 @@ let TASK_DATA = {
 const generateArrayTasks = (number = 100) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
-    arrayTasks.push(TASK_DATA);
+    arrayTasks.push(makeTaskData);
   }
   return arrayTasks;
 };
