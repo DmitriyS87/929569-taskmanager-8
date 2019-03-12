@@ -6,7 +6,7 @@ const mapColors = new Map([[`black`, `card--black`],
 
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
+  newElement.appendChild(template);
   return newElement;
 };
 
