@@ -82,6 +82,6 @@ FILTERS.forEach((renderData) => {
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 
-const tasks = generateArrayTasks(20);
+const tasks = generateArrayTasks(RANDOM_MAX);
 renderTasks(tasks);
 
