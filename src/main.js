@@ -1,6 +1,7 @@
 import {createFilter} from './filter';
 import {makeTaskData} from './data';
 import Task from './task';
+import TaskEdit from './task-edit';
 
 const RANDOM_MAX = 5;
 const FILTERS_PATH = document.querySelector(`.main__filter`);
