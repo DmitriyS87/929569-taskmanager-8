@@ -1,5 +1,4 @@
 import {createFilter} from './filter';
-import {createCard} from './card';
 import {makeTaskData} from './data';
 import Task from './task';
 
@@ -47,8 +46,8 @@ const getRandomCount = (max) => {
 const generateArrayTasks = (number = 10) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
+    let newTask = new Task(makeTaskData);
     arrayTasks.push(newTask.render());
-    // console.log(arrayTasks[i]);
   }
   return arrayTasks;
 };
@@ -82,10 +81,6 @@ FILTERS.forEach((renderData) => {
   const countTasks = getRandomCount(RANDOM_MAX);
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
-
-const newTask = new Task(makeTaskData);
-// console.log(newTask);
-
 
 const tasks = generateArrayTasks(20);
 renderTasks(tasks);
