@@ -2,9 +2,10 @@ import {createFilter} from './filter';
 import {makeTaskData} from './data';
 import Task from './task';
 
-const RANDOM_MAX = 50;
+const RANDOM_MAX = 5;
 const FILTERS_PATH = document.querySelector(`.main__filter`);
 const TASKS_BOARD = document.querySelector(`.board__tasks`);
+
 const FILTERS = [
   {
     id: `filter__all`,
@@ -43,11 +44,14 @@ const getRandomCount = (max) => {
   return Math.round(Math.random() * max);
 };
 
-const generateArrayTasks = (number = 10) => {
+const generateTasks = (number = 10) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
     let newTask = new Task(makeTaskData);
-    arrayTasks.push(newTask.render());
+    console.log(newTask);
+    TASKS_BOARD.appendChild(newTask.render());
+    console.log(newTask.render());
+    arrayTasks.push(newTask);
   }
   return arrayTasks;
 };
@@ -82,6 +86,6 @@ FILTERS.forEach((renderData) => {
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 
-const tasks = generateArrayTasks(RANDOM_MAX);
-renderTasks(tasks);
+const tasks = generateTasks(RANDOM_MAX);
+// renderTasks(tasks);
 
