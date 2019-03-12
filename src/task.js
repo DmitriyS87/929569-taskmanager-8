@@ -10,20 +10,29 @@ const createElement = (template) => {
   return newElement;
 };
 
+/*
+  if (this._isFavorite) {
+    template.content.querySelector(`.card`).classList.add(`card--deadline`);
+  }
+*/
+
 class Task {
   constructor(data) {
-    this._title = data.title,
-    this._dueDate = data.dueDate,
-    this._tags = data.tags,
-    this._picture = data.picture,
-    this._color = data.color,
-    this._repeatingDays = data.repeatingDays,
+    this._title = data.title;
+    this._dueDate = data.dueDate;
+    this._tags = data.tags;
+    this._picture = data.picture;
+    this._color = data.color;
+    this._repeatingDays = data.repeatingDays;
+    this._isFavorite = data.isFavorite;
+    this._isDone = data.isDone;
+    this._isHasDate = true;
 
+
+    this._element = null;
+    this._onEdit = null;
     this._state = {
       isEdit: false,
-      isFavorite: data.isFavorite,
-      isDone: data.isDone,
-      isHasDate: true
     };
   }
 
@@ -35,6 +44,10 @@ class Task {
     return Object.values(this._repeatingDays).some((value) => {
       return value === true;
     });
+  }
+
+  set onEdit(fn) {
+    this._onEdit = fn;
   }
 
   get template() {
@@ -49,10 +62,6 @@ class Task {
       hour: `numeric`,
       minute: `numeric`
     };
-
-    if (this._isFavorite) {
-      template.content.querySelector(`.card`).classList.add(`card--deadline`);
-    }
 
     const template = document.createElement(`template`);
     template.innerHTML = `<article class="card ${this._getColorStyle(this._color)} ${this._isRepeating() ? `card--repeat` : ``}">
@@ -233,14 +242,14 @@ class Task {
             </div>
           </div>
 
-          <label class="card__img-wrap ${this._picture ? `card__img-wrap--empty` : ``}">
+          <label class="card__img-wrap ${this._picture ? `` : `card__img-wrap--empty`}">
             <input
               type="file"
               class="card__img-input visually-hidden"
               name="img"
             />
             <img
-              src=${this._picture ? this._picture : `img/add-photo.svg`}
+              src="${this._picture ? this._picture : `img/add-photo.svg`}"
               alt="task picture"
               class="card__img"
             />
@@ -324,9 +333,21 @@ class Task {
     return template.content;
   }
 
+  _onEditButtonClick() {
+    typeof this._onEdit === `function` && this._onEdit();
+  }
+
+  bind() {
+    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick);
+  }
+
   render() {
     this._element = createElement(this.template);
     return this._element;
+  }
+
+  unrender() {
+    this._element = null;
   }
 }
 
