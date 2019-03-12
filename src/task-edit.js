@@ -10,7 +10,7 @@ const createElement = (template) => {
   return newElement;
 };
 
-class Task {
+class TaskEdit {
   constructor(data) {
     this._title = data.title,
     this._dueDate = data.dueDate,
@@ -336,5 +336,4 @@ class Task {
   }
 }
 
-export default Task;
-
+export default TaskEdit;
