@@ -64,7 +64,7 @@ class Task {
     };
 
     const template = document.createElement(`template`);
-    template.innerHTML = `<article class="card ${this._getColorStyle(this._color)} ${this._isRepeating() ? `card--repeat` : ``}">
+    template.innerHTML = `<article class="card ${this._getColorStyle(this._color)} ${this._isRepeating() ? ` card--repeat` : ``}">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
@@ -105,7 +105,7 @@ class Task {
                 date: <span class="card__date-status">no</span>
               </button>
 
-              <fieldset class="card__date-deadline" ${this._state.isHasDate ? `` : `disabled`}>
+              <fieldset class="card__date-deadline" ${this._isHasDate ? `` : ` disabled`}>
                 <label class="card__input-deadline-wrap">
                   <input
                     class="card__date"
@@ -208,27 +208,21 @@ class Task {
                 </div>
               </fieldset>
             </div>
-
             <div class="card__hashtag">
               <div class="card__hashtag-list">
-
               ${(Array.from(this._tags).map((tag) => {
     return (`<span class="card__hashtag-inner">
-                <input
-                  type="hidden"
-                  name="hashtag"
-                  value="${tag}"
-                  class="card__hashtag-hidden-input"
-                />
-                <button type="button" class="card__hashtag-name">
-                  #${tag}
-                </button>
-                <button type="button" class="card__hashtag-delete">
-                  delete
-                </button>
-                </span>`);
-  })).join(` `)}
-
+                 <input type="hidden" name="hashtag" value="${tag}"
+                   class="card__hashtag-hidden-input"
+                 />
+                 <button type="button" class="card__hashtag-name">
+                   #${tag}
+                 </button>
+                 <button type="button" class="card__hashtag-delete">
+                   delete
+                 </button>
+               </span>`);
+  }).join(` `))}
               </div>
 
               <label>
