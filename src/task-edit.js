@@ -6,27 +6,26 @@ const mapColors = new Map([[`black`, `card--black`],
 
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
-  newElement.appendChild(template);
-  return newElement;
+  newElement.innerHTML = template;
+  return newElement.firstChild;
 };
 
 class TaskEdit {
   constructor(data) {
-    this._title = data.title,
-    this._dueDate = data.dueDate,
-    this._tags = data.tags,
-    this._picture = data.picture,
-    this._color = data.color,
-    this._repeatingDays = data.repeatingDays,
+    this._title = data.title;
+    this._dueDate = data.dueDate;
+    this._tags = data.tags;
+    this._picture = data.picture;
+    this._color = data.color;
+    this._repeatingDays = data.repeatingDays;
+    this._isFavorite = data.isFavorite;
+    this._isDone = data.isDone;
+    this._isHasDate = true;
 
-    this._element = null,
 
-    this._state = {
-      isEdit: false,
-      isFavorite: data.isFavorite,
-      isDone: data.isDone,
-      isHasDate: true
-    };
+    this._element = null;
+    this._onSubmit = null;
+
   }
 
   _getColorStyle(color) {
@@ -37,6 +36,21 @@ class TaskEdit {
     return Object.values(this._repeatingDays).some((value) => {
       return value === true;
     });
+  }
+
+  _onSubmitButtonClick(evt) {
+    evt.preventDefault();
+    console.log(`submitted`);
+    return typeof (this._onSubmit === `function`) && this._onSubmit();
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  set onSubmit(fn) {
+    console.log(`onSubmit here!`);
+    this._onSubmit = fn;
   }
 
   get template() {
@@ -52,12 +66,7 @@ class TaskEdit {
       minute: `numeric`
     };
 
-    if (this._isFavorite) {
-      template.content.querySelector(`.card`).classList.add(`card--deadline`);
-    }
-
-    const template = document.createElement(`template`);
-    template.innerHTML = `<article class="card card--edit ${this._getColorStyle(this._color)} ${this._isRepeating() ? `card--repeat` : ``}">
+    const _template = `<article class="card card--edit ${this._getColorStyle(this._color)} ${this._isRepeating() ? `card--repeat` : ``}">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
@@ -100,7 +109,7 @@ class TaskEdit {
                 date: <span class="card__date-status">yes</span>
               </button>
 
-              <fieldset class="card__date-deadline" ${this._state.isHasDate ? `` : `disabled`}>
+              <fieldset class="card__date-deadline">
                 <label class="card__input-deadline-wrap">
                   <input
                     class="card__date"
@@ -206,22 +215,22 @@ class TaskEdit {
 
             <div class="card__hashtag">
               <div class="card__hashtag-list">
-              ${(Array.from(this._tags).map((tag) => {
+              ${Array.from(this._tags).map((tag) => {
     return (`<span class="card__hashtag-inner">
-                            <input
-                              type="hidden"
-                              name="hashtag"
-                              value="${tag}"
-                              class="card__hashtag-hidden-input"
-                            />
-                            <button type="button" class="card__hashtag-name">
-                              #${tag}
-                            </button>
-                            <button type="button" class="card__hashtag-delete">
-                              delete
-                            </button>
-                            </span>`);
-  })).join(` `)}
+                                        <input
+                                          type="hidden"
+                                          name="hashtag"
+                                          value="${tag}"
+                                          class="card__hashtag-hidden-input"
+                                        />
+                                        <button type="button" class="card__hashtag-name">
+                                          #${tag}
+                                        </button>
+                                        <button type="button" class="card__hashtag-delete">
+                                          delete
+                                        </button>
+                                        </span>`);
+  }).join(` `)}
               </div>
 
               <label>
@@ -323,11 +332,17 @@ class TaskEdit {
       </div>
     </form>
   </article>`;
-    return template.content;
+    return _template;
+  }
+
+  bind() {
+    console.log(`bind taskEdit`);
+    this._element.querySelector(`.card__save`).addEventListener(`click`, this._onSubmitButtonClick.bind(this));
   }
 
   render() {
     this._element = createElement(this.template);
+    this.bind();
     return this._element;
   }
 
