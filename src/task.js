@@ -6,8 +6,8 @@ const mapColors = new Map([[`black`, `card--black`],
 
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
-  newElement.appendChild(template);
-  return newElement;
+  newElement.innerHTML = template;
+  return newElement.firstChild;
 };
 
 /*
@@ -47,15 +47,15 @@ class Task {
   }
 
   _onEditButtonClick() {
-    this._state.isEdit = !this._state.isEdit;
-    this.update();
-    console.log(this._onEdit);
+    return typeof (this._onEdit === `function`) && this._onEdit();
   }
 
   set onEdit(fn) {
     this._onEdit = fn;
-    console.log(`what the @_onEdit is?`);
-    console.log(this._onEdit);
+  }
+
+  get element() {
+    return this._element;
   }
 
   get template() {
@@ -71,8 +71,8 @@ class Task {
       minute: `numeric`
     };
 
-    const template = document.createElement(`template`);
-    template.innerHTML = `<article class="card ${this._getColorStyle(this._color)} ${this._isRepeating() ? ` card--repeat` : ``}">
+    // const template = document.createElement(`template`);
+    const _template = `<article class="card ${this._getColorStyle(this._color)} ${this._isRepeating() ? ` card--repeat` : ``}">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
@@ -219,7 +219,7 @@ class Task {
             <div class="card__hashtag">
               <div class="card__hashtag-list">
               ${Array.from(this._tags).map((tag) => {
-    return `<span class="card__hashtag-inner">
+    return (`<span class="card__hashtag-inner">
                              <input type="hidden" name="hashtag" value="${tag}"
                                class="card__hashtag-hidden-input"
                              />
@@ -229,7 +229,7 @@ class Task {
                              <button type="button" class="card__hashtag-delete">
                                delete
                              </button>
-                           </span>`;
+                           </span>`);
   }).join(` `)}
               </div>
 
@@ -332,30 +332,18 @@ class Task {
       </div>
     </form>
   </article>`;
-    return template.content;
+    return _template;
   }
 
   bind() {
+    console.log(`bind task!`);
     this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
   }
 
-  render(container) {
-    if (this._element) {
-      container.removeChild(this._element);
-      this._element = null;
-    }
+  render() {
     this._element = createElement(this.template);
-    container.appendChild(this._element);
     this.bind();
-    this.update();
     return this._element;
-  }
-
-  update() {
-    if (this._state.isEdit) {
-      return this._element.classList.add(`card--edit`);
-    }
-    return this._element.classList.remove(`card--edit`);
   }
 
   unrender() {
