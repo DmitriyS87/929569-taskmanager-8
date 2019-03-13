@@ -50,24 +50,20 @@ const generateTasks = (number = 10) => {
   for (let i = 0; i < number; i++) {
     let newTask = new Task(makeTaskData);
     let newTaskEdit = new TaskEdit(makeTaskData);
-    newTask.render(TASKS_BOARD);
+    TASKS_BOARD.appendChild(newTask.render());
     newTask.onEdit = () => {
       newTaskEdit.render();
-      TASKS_BOARD.replaceChild(newTaskEdit._element, newTask._element);
+      TASKS_BOARD.replaceChild(newTaskEdit.element, newTask.element);
       newTask.unrender();
-      console.log(`event!`);
     };
-    arrayTasks.push(newTask);
+    newTaskEdit.onSubmit = () => {
+      newTask.render();
+      TASKS_BOARD.replaceChild(newTask.element, newTaskEdit.element);
+      newTaskEdit.unrender();
+    };
+    arrayTasks.push([newTask, newTaskEdit]);
   }
   return arrayTasks;
-};
-
-const renderTasks = (tasks) => {
-  const cardsFragment = document.createDocumentFragment();
-  for (let i = 0; i < tasks.length; i++) {
-    cardsFragment.appendChild(tasks[i]);
-  }
-  TASKS_BOARD.appendChild(cardsFragment);
 };
 
 const pushFilteredCards = (tasksCount) => {
@@ -93,4 +89,4 @@ FILTERS.forEach((renderData) => {
 });
 
 const tasks = generateTasks(RANDOM_MAX);
-// renderTasks(tasks);
+
