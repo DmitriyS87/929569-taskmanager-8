@@ -49,9 +49,14 @@ const generateTasks = (number = 10) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
     let newTask = new Task(makeTaskData);
-    console.log(newTask);
-    TASKS_BOARD.appendChild(newTask.render());
-    console.log(newTask.render());
+    let newTaskEdit = new TaskEdit(makeTaskData);
+    newTask.render(TASKS_BOARD);
+    newTask.onEdit = () => {
+      newTaskEdit.render();
+      TASKS_BOARD.replaceChild(newTaskEdit._element, newTask._element);
+      newTask.unrender();
+      console.log(`event!`);
+    };
     arrayTasks.push(newTask);
   }
   return arrayTasks;
@@ -89,4 +94,3 @@ FILTERS.forEach((renderData) => {
 
 const tasks = generateTasks(RANDOM_MAX);
 // renderTasks(tasks);
-
