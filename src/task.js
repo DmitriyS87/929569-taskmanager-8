@@ -10,12 +10,6 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-/*
-  if (this._isFavorite) {
-    template.content.querySelector(`.card`).classList.add(`card--deadline`);
-  }
-*/
-
 class Task {
   constructor(data) {
     this._title = data.title;
@@ -71,7 +65,6 @@ class Task {
       minute: `numeric`
     };
 
-    // const template = document.createElement(`template`);
     const _template = `<article class="card ${this._getColorStyle(this._color)} ${this._isRepeating() ? ` card--repeat` : ``}">
     <form class="card__form" method="get">
       <div class="card__inner">
