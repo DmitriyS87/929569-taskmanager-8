@@ -40,7 +40,6 @@ class TaskEdit {
 
   _onSubmitButtonClick(evt) {
     evt.preventDefault();
-    console.log(`submitted`);
     return typeof (this._onSubmit === `function`) && this._onSubmit();
   }
 
@@ -49,7 +48,6 @@ class TaskEdit {
   }
 
   set onSubmit(fn) {
-    console.log(`onSubmit here!`);
     this._onSubmit = fn;
   }
 
@@ -336,7 +334,6 @@ class TaskEdit {
   }
 
   bind() {
-    console.log(`bind taskEdit`);
     this._element.querySelector(`.card__save`).addEventListener(`click`, this._onSubmitButtonClick.bind(this));
   }
 

@@ -336,7 +336,6 @@ class Task {
   }
 
   bind() {
-    console.log(`bind task!`);
     this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
   }
 
