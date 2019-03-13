@@ -48,8 +48,9 @@ const getRandomCount = (max) => {
 const generateTasks = (number = 10) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
-    let newTask = new Task(makeTaskData);
-    let newTaskEdit = new TaskEdit(makeTaskData);
+    const data = makeTaskData;
+    let newTask = new Task(data);
+    let newTaskEdit = new TaskEdit(data);
     TASKS_BOARD.appendChild(newTask.render());
     newTask.onEdit = () => {
       newTaskEdit.render();
@@ -66,27 +67,21 @@ const generateTasks = (number = 10) => {
   return arrayTasks;
 };
 
-const pushFilteredCards = (tasksCount) => {
-  const cardsFragment = document.createDocumentFragment();
-  for (let i = 0; i < tasksCount; i++) {
-    cardsFragment.appendChild(tasks[i]);
-  }
-  TASKS_BOARD.appendChild(cardsFragment);
-};
-
-const clearTasksBoard = () => {
-  TASKS_BOARD.innerHTML = ``;
-};
-
 FILTERS.forEach((renderData) => {
   const onClickFilter = (countTasks) => {
-    clearTasksBoard();
-    pushFilteredCards(countTasks);
+    for (let i = 0; i < allTasks.length; i++) {
+      if (i >= countTasks) {
+        allTasks[i][0].element.classList.add(`card__delete`);
+      } else if (allTasks[i][0].element.querySelector(`.card__delete`)) {
+        allTasks[i][0].element.classList.remove(`card__delete`);
+      }
+
+    }
   };
 
   const countTasks = getRandomCount(RANDOM_MAX);
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 
-const tasks = generateTasks(RANDOM_MAX);
+const allTasks = generateTasks(RANDOM_MAX);
 
