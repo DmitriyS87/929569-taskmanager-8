@@ -32,7 +32,7 @@ class Task {
     this._element = null;
     this._onEdit = null;
     this._state = {
-      isEdit: false,
+      isEdit: false
     };
   }
 
@@ -46,8 +46,16 @@ class Task {
     });
   }
 
+  _onEditButtonClick() {
+    this._state.isEdit = !this._state.isEdit;
+    this.update();
+    console.log(this._onEdit);
+  }
+
   set onEdit(fn) {
     this._onEdit = fn;
+    console.log(`what the @_onEdit is?`);
+    console.log(this._onEdit);
   }
 
   get template() {
@@ -210,19 +218,19 @@ class Task {
             </div>
             <div class="card__hashtag">
               <div class="card__hashtag-list">
-              ${(Array.from(this._tags).map((tag) => {
-    return (`<span class="card__hashtag-inner">
-                 <input type="hidden" name="hashtag" value="${tag}"
-                   class="card__hashtag-hidden-input"
-                 />
-                 <button type="button" class="card__hashtag-name">
-                   #${tag}
-                 </button>
-                 <button type="button" class="card__hashtag-delete">
-                   delete
-                 </button>
-               </span>`);
-  }).join(` `))}
+              ${Array.from(this._tags).map((tag) => {
+    return `<span class="card__hashtag-inner">
+                             <input type="hidden" name="hashtag" value="${tag}"
+                               class="card__hashtag-hidden-input"
+                             />
+                             <button type="button" class="card__hashtag-name">
+                               #${tag}
+                             </button>
+                             <button type="button" class="card__hashtag-delete">
+                               delete
+                             </button>
+                           </span>`;
+  }).join(` `)}
               </div>
 
               <label>
@@ -327,17 +335,27 @@ class Task {
     return template.content;
   }
 
-  _onEditButtonClick() {
-    typeof this._onEdit === `function` && this._onEdit();
-  }
-
   bind() {
-    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick);
+    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
   }
 
-  render() {
+  render(container) {
+    if (this._element) {
+      container.removeChild(this._element);
+      this._element = null;
+    }
     this._element = createElement(this.template);
+    container.appendChild(this._element);
+    this.bind();
+    this.update();
     return this._element;
+  }
+
+  update() {
+    if (this._state.isEdit) {
+      return this._element.classList.add(`card--edit`);
+    }
+    return this._element.classList.remove(`card--edit`);
   }
 
   unrender() {
