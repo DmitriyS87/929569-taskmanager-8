@@ -1,15 +1,10 @@
+import {createElement} from './util';
+
 const mapColors = new Map([[`black`, `card--black`],
   [`yellow`, `card--yellow`],
   [`blue`, `card--blue`],
   [`green`, `card--green`],
   [`pink`, `card--pink`]]);
-
-const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-  return newElement.firstChild;
-};
-
 class Task {
   constructor(data) {
     this._title = data.title;
