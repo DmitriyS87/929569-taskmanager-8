@@ -53,8 +53,8 @@ const TASK_DATA = () => {
       Sa: getRandomBoolean(),
       Su: getRandomBoolean()
     },
-    isFavorite: Math.random() > 0.5 ? true : false,
-    isDone: Math.random() > 0.5 ? true : false
+    isFavorite: getRandomBoolean(),
+    isDone: getRandomBoolean()
   };
 };
 
