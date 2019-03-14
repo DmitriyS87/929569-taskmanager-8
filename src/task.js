@@ -1,10 +1,6 @@
 import {createElement} from './util';
+import {mapColors} from './data';
 
-const mapColors = new Map([[`black`, `card--black`],
-  [`yellow`, `card--yellow`],
-  [`blue`, `card--blue`],
-  [`green`, `card--green`],
-  [`pink`, `card--pink`]]);
 class Task {
   constructor(data) {
     this._title = data.title;

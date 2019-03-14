@@ -3,6 +3,7 @@ const ARRAY_TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`, `ment
 const MAX_TAGS_COUNT = 3;
 const ARRAY_COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
 
+
 const makeTaskDate = () => {
   const date = new Date();
   date.setDate(Math.floor(Math.random() * 7 - Math.random() * 7));
@@ -59,3 +60,8 @@ const TASK_DATA = () => {
 };
 
 export const makeTaskData = TASK_DATA;
+export const mapColors = new Map([[`black`, `card--black`],
+  [`yellow`, `card--yellow`],
+  [`blue`, `card--blue`],
+  [`green`, `card--green`],
+  [`pink`, `card--pink`]]);

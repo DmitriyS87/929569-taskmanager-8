@@ -1,10 +1,5 @@
 import {createElement} from './util';
-
-const mapColors = new Map([[`black`, `card--black`],
-  [`yellow`, `card--yellow`],
-  [`blue`, `card--blue`],
-  [`green`, `card--green`],
-  [`pink`, `card--pink`]]);
+import {mapColors} from './data';
 
 class TaskEdit {
   constructor(data) {
