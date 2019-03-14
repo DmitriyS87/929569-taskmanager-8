@@ -48,7 +48,7 @@ const getRandomCount = (max) => {
 const generateTasks = (number = 10) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
-    const data = makeTaskData;
+    const data = makeTaskData();
     let newTask = new Task(data);
     let newTaskEdit = new TaskEdit(data);
     TASKS_BOARD.appendChild(newTask.render());

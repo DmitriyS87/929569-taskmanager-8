@@ -18,7 +18,7 @@ const getIndexSequence = function (max) {
 };
 
 const getRandomCount = (max) => {
-  return Math.round(Math.random() * max);
+  return Math.floor(Math.random() * max);
 };
 
 const getRandomSubArray = function (array, count) {
@@ -31,54 +31,31 @@ const getRandomSubArray = function (array, count) {
     indexSequence.splice(randomIndex, 1);
   }
   return subArray;
-
 };
 
-let TASK_DATA = {
-  get title() {
-    return TASKS_TITLES[Math.floor(Math.random() * 3)];
-  },
-  get dueDate() {
-    return makeTaskDate();
-  },
-  get tags() {
-    return new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT));
-  },
-  get picture() {
-    return `http://picsum.photos/100/100?r=${Math.random()}`;
-  },
-  get color() {
-    return ARRAY_COLORS[[Math.round(Math.random() * (ARRAY_COLORS.length - 1))]];
-  },
-  repeatingDays: {
-    get Mo() {
-      return Math.random() > 0.5 ? true : false;
+const getRandomBoolean = () => {
+  return Math.random() > 0.5 ? true : false;
+};
+
+const TASK_DATA = () => {
+  return {
+    title: TASKS_TITLES[getRandomCount(3)],
+    dueDate: makeTaskDate(),
+    tags: new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT)),
+    picture: `http://picsum.photos/100/100?r=${Math.random()}`,
+    color: ARRAY_COLORS[getRandomCount(ARRAY_COLORS.length)],
+    repeatingDays: {
+      Mo: getRandomBoolean(),
+      Tu: getRandomBoolean(),
+      We: getRandomBoolean(),
+      Th: getRandomBoolean(),
+      Fr: getRandomBoolean(),
+      Sa: getRandomBoolean(),
+      Su: getRandomBoolean()
     },
-    get Tu() {
-      return Math.random() > 0.5 ? true : false;
-    },
-    get We() {
-      return Math.random() > 0.5 ? true : false;
-    },
-    get Th() {
-      return Math.random() > 0.5 ? true : false;
-    },
-    get Fr() {
-      return Math.random() > 0.5 ? true : false;
-    },
-    get Sa() {
-      return Math.random() > 0.5 ? true : false;
-    },
-    get Su() {
-      return Math.random() > 0.5 ? true : false;
-    }
-  },
-  get isFavorite() {
-    return Math.random() > 0.5 ? true : false;
-  },
-  get isDone() {
-    return Math.random() > 0.5 ? true : false;
-  }
+    isFavorite: Math.random() > 0.5 ? true : false,
+    isDone: Math.random() > 0.5 ? true : false
+  };
 };
 
 export const makeTaskData = TASK_DATA;
