@@ -327,6 +327,10 @@ class Task {
     this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
   }
 
+  unbind() {
+    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this._onEditButtonClick.bind(this));
+  }
+
   render() {
     this._element = createElement(this.template);
     this.bind();
@@ -334,6 +338,7 @@ class Task {
   }
 
   unrender() {
+    this.unbind();
     this._element = null;
   }
 }

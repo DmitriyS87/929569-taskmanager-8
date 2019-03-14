@@ -333,6 +333,10 @@ class TaskEdit {
     this._element.querySelector(`.card__save`).addEventListener(`click`, this._onSubmitButtonClick.bind(this));
   }
 
+  unbind() {
+    this._element.querySelector(`.card__save`).removeEventListener(`click`, this._onSubmitButtonClick.bind(this));
+  }
+
   render() {
     this._element = createElement(this.template);
     this.bind();
@@ -340,6 +344,7 @@ class TaskEdit {
   }
 
   unrender() {
+    this.unbind();
     this._element = null;
   }
 }
