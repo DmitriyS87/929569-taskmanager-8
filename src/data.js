@@ -38,7 +38,7 @@ const getRandomBoolean = () => {
 
 const TASK_DATA = () => {
   return {
-    title: TASKS_TITLES[getLessRandomCount(4)],
+    title: TASKS_TITLES[getLessRandomCount(TASKS_TITLES.length)],
     dueDate: makeTaskDate(),
     tags: new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT)),
     picture: `http://picsum.photos/100/100?r=${Math.random()}`,
