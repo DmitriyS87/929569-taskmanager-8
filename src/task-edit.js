@@ -46,9 +46,12 @@ class TaskEdit {
     });
   }
 
-  _onSubmitButtonClick(evt) {
-    evt.preventDefault();
+  _onSubmitButtonClick() {
     return typeof (this._onSubmit === `function`) && this._onSubmit();
+  }
+
+  handleEvent(event) {
+    return event.type === `click` && this._onSubmitButtonClick();
   }
 
   get element() {
@@ -329,11 +332,11 @@ class TaskEdit {
   }
 
   bind() {
-    this._element.querySelector(`.card__save`).addEventListener(`click`, this._onSubmitButtonClick.bind(this));
+    this._element.querySelector(`.card__save`).addEventListener(`click`, this, false);
   }
 
   unbind() {
-    this._element.querySelector(`.card__save`).removeEventListener(`click`, this._onSubmitButtonClick.bind(this));
+    this._element.querySelector(`.card__save`).removeEventListener(`click`, this, false);
   }
 
   render() {

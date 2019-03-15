@@ -13,7 +13,6 @@ class Task {
     this._isDone = data.isDone;
     this._isHasDate = true;
 
-
     this._element = null;
     this._onEdit = null;
     this._state = {
@@ -49,11 +48,15 @@ class Task {
   }
 
   _onEditButtonClick() {
-    return typeof (this._onEdit === `function`) && this._onEdit();
+    return (this._onEdit instanceof Function) && this._onEdit();
+  }
+
+  handleEvent(event) {
+    return event.type === `click` && this._onEditButtonClick();
   }
 
   set onEdit(fn) {
-    this._onEdit = fn;
+    this._onEdit = fn.bind(this);
   }
 
   get element() {
@@ -327,11 +330,11 @@ class Task {
   }
 
   bind() {
-    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
+    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this, false);
   }
 
   unbind() {
-    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this._onEditButtonClick.bind(this));
+    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this, false);
   }
 
   render() {
