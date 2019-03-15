@@ -5,3 +5,6 @@ export const createElement = (template) => {
   return newElement.firstChild;
 };
 
+export const getLessRandomCount = (max) => {
+  return Math.floor(Math.random() * max);
+};

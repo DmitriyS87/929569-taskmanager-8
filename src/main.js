@@ -2,6 +2,7 @@ import {createFilter} from './filter';
 import {makeTaskData} from './data';
 import Task from './task';
 import TaskEdit from './task-edit';
+import {getLessRandomCount} from './util';
 
 const RANDOM_MAX = 5;
 const FILTERS_PATH = document.querySelector(`.main__filter`);
@@ -41,10 +42,6 @@ const FILTERS = [
   }
 ];
 
-const getRandomCount = (max) => {
-  return Math.round(Math.random() * max);
-};
-
 const generateTasks = (number = 10) => {
   const arrayTasks = [];
   for (let i = 0; i < number; i++) {
@@ -79,7 +76,7 @@ FILTERS.forEach((renderData) => {
     }
   };
 
-  const countTasks = getRandomCount(RANDOM_MAX);
+  const countTasks = getLessRandomCount(RANDOM_MAX + 1);
   FILTERS_PATH.appendChild(createFilter(renderData, countTasks, onClickFilter));
 });
 

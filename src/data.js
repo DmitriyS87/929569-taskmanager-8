@@ -1,3 +1,5 @@
+import {getLessRandomCount} from './util';
+
 const TASKS_TITLES = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
 const ARRAY_TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`, `mentor`, `important`];
 const MAX_TAGS_COUNT = 3;
@@ -18,16 +20,12 @@ const getIndexSequence = function (max) {
   return sequence;
 };
 
-const getRandomCount = (max) => {
-  return Math.floor(Math.random() * max);
-};
-
 const getRandomSubArray = function (array, count) {
   const subArray = [];
   const indexSequence = getIndexSequence(array.length);
-  const length = getRandomCount(count);
+  const length = getLessRandomCount(count + 1);
   for (let j = 0; j < length; j++) {
-    let randomIndex = getRandomCount(indexSequence.length - 1);
+    let randomIndex = getLessRandomCount(indexSequence.length);
     subArray.push(array[indexSequence[randomIndex]]);
     indexSequence.splice(randomIndex, 1);
   }
@@ -40,11 +38,11 @@ const getRandomBoolean = () => {
 
 const TASK_DATA = () => {
   return {
-    title: TASKS_TITLES[getRandomCount(3)],
+    title: TASKS_TITLES[getLessRandomCount(4)],
     dueDate: makeTaskDate(),
     tags: new Set(getRandomSubArray(ARRAY_TAGS, MAX_TAGS_COUNT)),
     picture: `http://picsum.photos/100/100?r=${Math.random()}`,
-    color: ARRAY_COLORS[getRandomCount(ARRAY_COLORS.length)],
+    color: ARRAY_COLORS[getLessRandomCount(ARRAY_COLORS.length)],
     repeatingDays: {
       Mo: getRandomBoolean(),
       Tu: getRandomBoolean(),
