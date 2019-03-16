@@ -1,8 +1,8 @@
-import {createElement} from './util';
 import {mapColors} from './data';
-
-class TaskEdit {
+import Component from './component';
+class TaskEdit extends Component {
   constructor(data) {
+    super();
     this._title = data.title;
     this._dueDate = data.dueDate;
     this._tags = data.tags;
@@ -13,10 +13,7 @@ class TaskEdit {
     this._isDone = data.isDone;
     this._isHasDate = true;
 
-
-    this._element = null;
     this._onSubmit = null;
-
   }
 
   _getTag(tag) {
@@ -52,10 +49,6 @@ class TaskEdit {
 
   handleEvent(event) {
     return event.type === `click` && this._onSubmitButtonClick();
-  }
-
-  get element() {
-    return this._element;
   }
 
   set onSubmit(fn) {
@@ -331,23 +324,12 @@ class TaskEdit {
     return _template;
   }
 
-  bind() {
+  createListeners() {
     this._element.querySelector(`.card__save`).addEventListener(`click`, this, false);
   }
 
-  unbind() {
+  removeListeners() {
     this._element.querySelector(`.card__save`).removeEventListener(`click`, this, false);
-  }
-
-  render() {
-    this._element = createElement(this.template);
-    this.bind();
-    return this._element;
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 }
 
