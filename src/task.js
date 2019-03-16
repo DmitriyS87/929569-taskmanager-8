@@ -1,4 +1,3 @@
-import {createElement} from './util';
 import {mapColors} from './data';
 import Component from './component';
 
