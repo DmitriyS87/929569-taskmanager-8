@@ -324,11 +324,11 @@ class TaskEdit extends Component {
     return _template;
   }
 
-  bind() {
+  createListeners() {
     this._element.querySelector(`.card__save`).addEventListener(`click`, this, false);
   }
 
-  unbind() {
+  removeListeners() {
     this._element.querySelector(`.card__save`).removeEventListener(`click`, this, false);
   }
 }
