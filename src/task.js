@@ -1,5 +1,6 @@
 import {createElement} from './util';
 import {mapColors} from './data';
+import Component from './component';
 
 class Task {
   constructor(data) {
