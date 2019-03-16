@@ -2,8 +2,9 @@ import {createElement} from './util';
 import {mapColors} from './data';
 import Component from './component';
 
-class Task {
+class Task extends Component {
   constructor(data) {
+    super();
     this._title = data.title;
     this._dueDate = data.dueDate;
     this._tags = data.tags;
@@ -14,11 +15,7 @@ class Task {
     this._isDone = data.isDone;
     this._isHasDate = true;
 
-    this._element = null;
     this._onEdit = null;
-    this._state = {
-      isEdit: false
-    };
   }
 
   _getTag(tag) {
@@ -58,10 +55,6 @@ class Task {
 
   set onEdit(fn) {
     this._onEdit = fn.bind(this);
-  }
-
-  get element() {
-    return this._element;
   }
 
   get template() {
@@ -336,17 +329,6 @@ class Task {
 
   unbind() {
     this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this, false);
-  }
-
-  render() {
-    this._element = createElement(this.template);
-    this.bind();
-    return this._element;
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 }
 
