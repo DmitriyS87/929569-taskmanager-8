@@ -18,10 +18,10 @@ class Component {
     throw new Error(`You have to define template.`);
   }
 
-  bind() {
+  createListeners() {
   }
 
-  unbind() {
+  removeListeners() {
   }
 
   render() {
