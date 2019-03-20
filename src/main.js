@@ -54,12 +54,20 @@ const generateTasks = (number = 10) => {
       TASKS_BOARD.replaceChild(newTaskEdit.element, newTask.element);
       newTask.unrender();
     };
-    newTaskEdit.onSubmit = () => {
+    newTaskEdit.onSubmit = (newObject) => {
+      data.title = newObject.title;
+      data.tags = newObject.tags;
+      data.color = newObject.color;
+      data.repeatingDays = newObject.repeatingDays;
+      data.dueDate = newObject.dueDate;
+
+      newTask.update(data);
       newTask.render();
       TASKS_BOARD.replaceChild(newTask.element, newTaskEdit.element);
       newTaskEdit.unrender();
     };
     arrayTasks.push([newTask, newTaskEdit]);
+    // console.log([newTask._count, newTaskEdit._count]);
   }
   return arrayTasks;
 };

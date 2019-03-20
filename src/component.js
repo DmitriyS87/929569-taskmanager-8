@@ -1,10 +1,16 @@
 import {createElement} from './util';
-
+let counter = 4;
 class Component {
   constructor() {
     if (new.target === Component) {
       throw Error(`Can't instantiate BaseComponent, use only to insert BaseComponent structure to your own components`);
     }
+
+    (function () {
+      counter = counter + 1;
+    })();
+    this._count = counter;
+    // console.log(this._count);
 
     this._element = null;
     this._state = {};

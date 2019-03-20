@@ -140,53 +140,53 @@ class Task extends Component {
                   <input
                     class="visually-hidden card__repeat-day-input"
                     type="checkbox"
-                    id="repeat-mo-5"
+                    id="repeat-mo-${this._count}"
                     name="repeat"
                     value="mo"
                   />
-                  <label class="card__repeat-day" for="repeat-mo-5"
+                  <label class="card__repeat-day" for="repeat-mo-${this._count}"
                     >mo</label
                   >
                   <input
                     class="visually-hidden card__repeat-day-input"
                     type="checkbox"
-                    id="repeat-tu-5"
+                    id="repeat-tu-${this._count}"
                     name="repeat"
                     value="tu"
                     checked
                   />
-                  <label class="card__repeat-day" for="repeat-tu-5"
+                  <label class="card__repeat-day" for="repeat-tu-${this._count}"
                     >tu</label
                   >
                   <input
                     class="visually-hidden card__repeat-day-input"
                     type="checkbox"
-                    id="repeat-we-5"
+                    id="repeat-we-${this._count}"
                     name="repeat"
                     value="we"
                   />
-                  <label class="card__repeat-day" for="repeat-we-5"
+                  <label class="card__repeat-day" for="repeat-we-${this._count}"
                     >we</label
                   >
                   <input
                     class="visually-hidden card__repeat-day-input"
                     type="checkbox"
-                    id="repeat-th-5"
+                    id="repeat-th-${this._count}"
                     name="repeat"
                     value="th"
                   />
-                  <label class="card__repeat-day" for="repeat-th-5"
+                  <label class="card__repeat-day" for="repeat-th-${this._count}"
                     >th</label
                   >
                   <input
                     class="visually-hidden card__repeat-day-input"
                     type="checkbox"
-                    id="repeat-fr-5"
+                    id="repeat-fr-${this._count}"
                     name="repeat"
                     value="fr"
                     checked
                   />
-                  <label class="card__repeat-day" for="repeat-fr-5"
+                  <label class="card__repeat-day" for="repeat-fr-${this._count}"
                     >fr</label
                   >
                   <input
@@ -194,20 +194,20 @@ class Task extends Component {
                     type="checkbox"
                     name="repeat"
                     value="sa"
-                    id="repeat-sa-5"
+                    id="repeat-sa-${this._count}"
                   />
-                  <label class="card__repeat-day" for="repeat-sa-5"
+                  <label class="card__repeat-day" for="repeat-sa-${this._count}"
                     >sa</label
                   >
                   <input
                     class="visually-hidden card__repeat-day-input"
                     type="checkbox"
-                    id="repeat-su-5"
+                    id="repeat-su-${this._count}"
                     name="repeat"
                     value="su"
                     checked
                   />
-                  <label class="card__repeat-day" for="repeat-su-5"
+                  <label class="card__repeat-day" for="repeat-su-${this._count}"
                     >su</label
                   >
                 </div>
@@ -249,62 +249,62 @@ class Task extends Component {
             <div class="card__colors-wrap">
               <input
                 type="radio"
-                id="color-black-5"
+                id="color-black-${this._count}"
                 class="card__color-input card__color-input--black visually-hidden"
                 name="color"
                 value="black"
               />
               <label
-                for="color-black-5"
+                for="color-black-${this._count}"
                 class="card__color card__color--black"
                 >black</label
               >
               <input
                 type="radio"
-                id="color-yellow-5"
+                id="color-yellow-${this._count}"
                 class="card__color-input card__color-input--yellow visually-hidden"
                 name="color"
                 value="yellow"
               />
               <label
-                for="color-yellow-5"
+                for="color-yellow-${this._count}"
                 class="card__color card__color--yellow"
                 >yellow</label
               >
               <input
                 type="radio"
-                id="color-blue-5"
+                id="color-blue-${this._count}"
                 class="card__color-input card__color-input--blue visually-hidden"
                 name="color"
                 value="blue"
               />
               <label
-                for="color-blue-5"
+                for="color-blue-${this._count}"
                 class="card__color card__color--blue"
                 >blue</label
               >
               <input
                 type="radio"
-                id="color-green-5"
+                id="color-green-${this._count}"
                 class="card__color-input card__color-input--green visually-hidden"
                 name="color"
                 value="green"
                 checked
               />
               <label
-                for="color-green-5"
+                for="color-green-${this._count}"
                 class="card__color card__color--green"
                 >green</label
               >
               <input
                 type="radio"
-                id="color-pink-5"
+                id="color-pink-${this._count}"
                 class="card__color-input card__color-input--pink visually-hidden"
                 name="color"
                 value="pink"
               />
               <label
-                for="color-pink-5"
+                for="color-pink-${this._count}"
                 class="card__color card__color--pink"
                 >pink</label
               >
@@ -339,7 +339,6 @@ class Task extends Component {
     this._repeatingDays = data.repeatingDays;
     this._isFavorite = data.isFavorite;
     this._isDone = data.isDone;
-    this._isHasDate = true;
   }
 }
 

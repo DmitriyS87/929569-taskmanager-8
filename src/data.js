@@ -44,13 +44,13 @@ const TASK_DATA = () => {
     picture: `http://picsum.photos/100/100?r=${Math.random()}`,
     color: ARRAY_COLORS[getLessRandomCount(ARRAY_COLORS.length)],
     repeatingDays: {
-      Mo: getRandomBoolean(),
-      Tu: getRandomBoolean(),
-      We: getRandomBoolean(),
-      Th: getRandomBoolean(),
-      Fr: getRandomBoolean(),
-      Sa: getRandomBoolean(),
-      Su: getRandomBoolean()
+      mo: getRandomBoolean(),
+      tu: getRandomBoolean(),
+      we: getRandomBoolean(),
+      th: getRandomBoolean(),
+      fr: getRandomBoolean(),
+      sa: getRandomBoolean(),
+      su: getRandomBoolean()
     },
     isFavorite: getRandomBoolean(),
     isDone: getRandomBoolean()
