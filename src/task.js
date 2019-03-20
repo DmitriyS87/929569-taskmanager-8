@@ -329,6 +329,18 @@ class Task extends Component {
   removeListeners() {
     this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this, false);
   }
+
+  update(data) {
+    this._title = data.title;
+
+    this._tags = data.tags;
+    this._picture = data.picture;
+    this._color = data.color;
+    this._repeatingDays = data.repeatingDays;
+    this._isFavorite = data.isFavorite;
+    this._isDone = data.isDone;
+    this._isHasDate = true;
+  }
 }
 
 export default Task;
