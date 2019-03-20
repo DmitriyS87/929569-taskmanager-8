@@ -36,6 +36,9 @@ class Component {
     this._element = null;
   }
 
+  update() {
+  }
+
 }
 
 export default Component;
