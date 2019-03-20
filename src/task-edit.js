@@ -1,3 +1,4 @@
+const flatpickr = require(`flatpickr`);
 import {mapColors} from './data';
 import Component from './component';
 
