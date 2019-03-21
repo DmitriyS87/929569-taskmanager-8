@@ -59,7 +59,7 @@ const generateTasks = (number = 10) => {
       data.tags = newObject.tags;
       data.color = newObject.color;
       data.repeatingDays = newObject.repeatingDays;
-      data.dueDate = newObject.dueDate;
+      data.dueDate = newObject.dueDate ? newObject.dueDate : undefined;
 
       newTask.update(data);
       newTask.render();

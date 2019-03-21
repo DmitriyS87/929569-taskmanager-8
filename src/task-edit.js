@@ -143,6 +143,7 @@ class TaskEdit extends Component {
     };
 
     const translator = TaskEdit.createMapper(entry);
+    console.log(translator);
 
     for (let pair of formData.entries()) {
       let [key, value] = pair;
@@ -151,7 +152,7 @@ class TaskEdit extends Component {
       }
       console.log(pair);
     }
-
+    console.log(entry);
     return entry;
   }
 
@@ -213,28 +214,26 @@ class TaskEdit extends Component {
               <button class="card__date-deadline-toggle" type="button">
                 date: <span class="card__date-status">${this._state.isDate ? `yes` : `no`}</span>
               </button>
-
               <fieldset class="card__date-deadline" ${!this._state.isDate && `disabled`}>
-                <label class="card__input-deadline-wrap">
-                  <input
-                    class="card__date"
-                    type="text"
-                    placeholder="23 September"
-                    name="date"
-                    value="${getLocaledDate(this._dueDate, `en-GB`, dayOptions)}"
-                  />
-                </label>
-                <label class="card__input-deadline-wrap">
-                  <input
-                    class="card__time"
-                    type="text"
-                    placeholder="11:15 PM"
-                    name="time"
-                    value="${getLocaledDate(this._dueDate, `en-US`, timeOptions)}"
-                  />
-                </label>
-              </fieldset>
-
+      <label class="card__input-deadline-wrap">
+        <input
+          class="card__date"
+          type="text"
+          placeholder="23 September"
+          name="date"
+          value="${this._state.isDate ? getLocaledDate(this._dueDate, `en-GB`, dayOptions) : ``}"
+        />
+      </label>
+      <label class="card__input-deadline-wrap">
+        <input
+          class="card__time"
+          type="text"
+          placeholder="11:15 PM"
+          name="time"
+          value="${this._state.isDate ? getLocaledDate(this._dueDate, `en-US`, timeOptions) : ``}"
+        />
+      </label>
+    </fieldset>
               <button class="card__repeat-toggle" type="button">
                 repeat:<span class="card__repeat-status">${this._state.isRepeating ? `yes` : `no`}</span>
               </button>
@@ -498,6 +497,7 @@ class TaskEdit extends Component {
   }
 
   render() {
+    this._state.isDate = this._dueDate ? true : false;
     this._state.isRepeating = this._isRepeating();
     super.render();
   }

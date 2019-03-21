@@ -10,7 +10,6 @@ class Component {
       counter = counter + 1;
     })();
     this._count = counter;
-    // console.log(this._count);
 
     this._element = null;
     this._state = {};

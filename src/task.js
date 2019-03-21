@@ -1,5 +1,6 @@
 import {mapColors} from './data';
 import Component from './component';
+// const moment = require(`moment`);
 
 class Task extends Component {
   constructor(data) {
@@ -12,7 +13,9 @@ class Task extends Component {
     this._repeatingDays = data.repeatingDays;
     this._isFavorite = data.isFavorite;
     this._isDone = data.isDone;
-    this._isHasDate = true;
+    // this._isHasDate = false;
+
+    this._state.isDate = false;
 
     this._onEdit = null;
   }
@@ -42,6 +45,15 @@ class Task extends Component {
     return Object.values(this._repeatingDays).some((value) => {
       return value === true;
     });
+  }
+
+  _checkIsDate() {
+    if (this._dueDate instanceof Date) {
+      console.log(this._dueDate);
+      return true;
+    }
+    console.log(`false`);
+    return false;
   }
 
   _onEditButtonClick() {
@@ -110,7 +122,7 @@ class Task extends Component {
                 date: <span class="card__date-status">no</span>
               </button>
 
-              <fieldset class="card__date-deadline" ${this._isHasDate ? `` : ` disabled`}>
+              <fieldset class="card__date-deadline" ${this._state.isDate ? `` : ` disabled`}>
                 <label class="card__input-deadline-wrap">
                   <input
                     class="card__date"
@@ -330,9 +342,14 @@ class Task extends Component {
     this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this, false);
   }
 
+  render() {
+    this._state.isDate = this._checkIsDate();
+    return super.render();
+  }
+
   update(data) {
     this._title = data.title;
-    this._dueDate = data.dueDate;
+    this._dueDate = data.dueDate !== undefined ? data.dueDate : undefined;
     this._tags = data.tags;
     this._picture = data.picture;
     this._color = data.color;
