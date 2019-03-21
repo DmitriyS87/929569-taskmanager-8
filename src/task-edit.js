@@ -148,6 +148,7 @@ class TaskEdit extends Component {
       if (translator[key]) {
         translator[key](value);
       }
+      console.log(pair);
     }
 
     return entry;
@@ -436,6 +437,12 @@ class TaskEdit extends Component {
   createListeners() {
     this._element.querySelector(`.card__save`).addEventListener(`click`, this._onSubmitButtonClick);
     this._element.querySelector(`.card__date-deadline-toggle`).addEventListener(`click`, this._onChangeDate);
+    if (this._state.isDate) {
+      const dateElement = this._element.querySelector(`.card__date`);
+      const timeElement = this._element.querySelector(`.card__time`);
+      flatpickr(dateElement, {altInput: true, altFormat: `j F`, dateFormat: `j F`});
+      flatpickr(timeElement, {enableTime: true, noCalendar: true, altInput: true, altFormat: `h:i K`, dateFormat: `h:i K`});
+    }
     this._element.querySelector(`.card__repeat-toggle`).addEventListener(`click`, this._onChangeRepeating);
     this._element.querySelector(`.card__text`).addEventListener(`input`, this._onInputTitle);
     this._element.querySelector(`.card__img-input`).addEventListener(`input`, this._onChangePicture);
