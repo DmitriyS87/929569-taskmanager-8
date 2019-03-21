@@ -1,3 +1,4 @@
+const webpack = require(`webpack`);
 const path = require(`path`);
 
 module.exports = {
@@ -19,5 +20,8 @@ module.exports = {
       test: /\.js$/,
       use: `babel-loader`
     }]
-  }
+  },
+  plugins: [
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
+  ]
 };
