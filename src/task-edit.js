@@ -480,6 +480,9 @@ class TaskEdit extends Component {
       date: (value) => {
         return target.dueDate[value];
       },
+      time: (value) => {
+        return target.dueDate[value];
+      },
       img: (value) => {
         target.picture = value;
         return target.picture[value];
