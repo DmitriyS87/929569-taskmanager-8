@@ -49,10 +49,10 @@ class Task extends Component {
 
   _checkIsDate() {
     if (this._dueDate instanceof Date) {
-      console.log(this._dueDate);
+      // console.log(this._dueDate);
       return true;
     }
-    console.log(`false`);
+    // console.log(`false`);
     return false;
   }
 

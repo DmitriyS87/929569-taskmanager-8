@@ -143,16 +143,16 @@ class TaskEdit extends Component {
     };
 
     const translator = TaskEdit.createMapper(entry);
-    console.log(translator);
+    // console.log(translator);
 
     for (let pair of formData.entries()) {
       let [key, value] = pair;
       if (translator[key]) {
         translator[key](value);
       }
-      console.log(pair);
+    //  console.log(pair);
     }
-    console.log(entry);
+    //  console.log(entry);
     return entry;
   }
 
