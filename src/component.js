@@ -1,5 +1,5 @@
 import {createElement} from './util';
-let counter = 4;
+let counter = 6;
 class Component {
   constructor() {
     if (new.target === Component) {
