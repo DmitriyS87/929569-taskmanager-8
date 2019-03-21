@@ -1,4 +1,5 @@
 const flatpickr = require(`flatpickr`);
+const moment = require(`moment`);
 import {mapColors} from './data';
 import Component from './component';
 
@@ -478,10 +479,16 @@ class TaskEdit extends Component {
         return target.repeatingDays[value];
       },
       date: (value) => {
-        return target.dueDate[value];
+        const newDate = moment(value, `DD-MMMM`);
+        target.dueDate.setDate(newDate.date());
+        target.dueDate.setMonth(newDate.month());
+        return target.dueDate;
       },
       time: (value) => {
-        return target.dueDate[value];
+        const newTime = moment(value, `hh-mm-a`);
+        target.dueDate.setHours(newTime.hours());
+        target.dueDate.setMinutes(newTime.minutes());
+        return target.dueDate;
       },
       img: (value) => {
         target.picture = value;
